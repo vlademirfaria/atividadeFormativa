@@ -4,8 +4,14 @@ import java.util.Scanner;
 public class InterfaceUsuario {
     public double pedirValorImovel() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Informe o valor do imóvel: ");
-        double valorDesejadoImovel = scanner.nextDouble();
+        double valorDesejadoImovel;
+        do {
+            System.out.println("Informe o valor do imóvel: ");
+            valorDesejadoImovel = scanner.nextDouble();
+            if (valorDesejadoImovel < 10000) {
+                System.out.println("Valor de financiamento muito baixo. Digite um valor maior.");
+            }
+        } while (valorDesejadoImovel < 10000);
         return valorDesejadoImovel;
     }
 
