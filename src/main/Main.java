@@ -1,30 +1,30 @@
 package main;
 import java.util.ArrayList;
 import java.util.List;
-import java.math.BigDecimal;
-import modelo.Financiamento;
+import modelo.*;
 import util.InterfaceUsuario;
 
 public class Main {
     public static void main(String[] args) {
         InterfaceUsuario interfaceUsuario = new InterfaceUsuario();
+
         List<Financiamento> financiamentos = new ArrayList<>();
 
-        for (int i = 1; i <= 4; i++) {
-            System.out.println("Financiamento " + i + ":");
-            Financiamento financiamento = interfaceUsuario.criarFinanciamento();
-            financiamentos.add(financiamento);
-            // Exibe os detalhes do financiamento
-            financiamento.dadosFinanciamento();
-            System.out.println(); // Linha em branco para melhor leitura
-        }
+        financiamentos.add(new Casa(1000000.00, 15, 12));
+        financiamentos.add(new Casa(1835423.42, 35, 19));
+        financiamentos.add(new Apartamento(37529426.37, 32, 15));
+        financiamentos.add(new Apartamento(352013654.00, 22, 10));
+        financiamentos.add(new Terreno(interfaceUsuario.pedirValorImovel(), interfaceUsuario.pedirPrazoFinanciamento(), interfaceUsuario.pedirTaxaJuros()));
 
         double totalImoveis = 0;
-        BigDecimal totalFinanciamentos = BigDecimal.ZERO;
+        double totalFinanciamentos = 0;
 
-        for (Financiamento f : financiamentos){
+        for (Financiamento f : financiamentos) {
             totalImoveis += f.getValorImovel();
-            totalFinanciamentos = totalFinanciamentos.add(f.calcularTotalPagamento());
+            totalFinanciamentos += f.calcularTotalPagamento();
+
+            f.dadosFinanciamento();
+            System.out.println();
         }
 
         System.out.printf("Total de todos os imóveis: R$%.2f\n", totalImoveis);
